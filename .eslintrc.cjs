@@ -23,7 +23,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off",
     "react/react-in-jsx-scope": "off",
     "import/no-named-as-default": 0,
-    "import/no-unresolved": ["error", { "ignore": ["^@/"] }],
+    "import/no-unresolved": ["error", { "ignore": ["^@/", "^~/"] }],
     "react/display-name": "off",
     "@typescript-eslint/ban-types": "off",
     "import/named": "off",
