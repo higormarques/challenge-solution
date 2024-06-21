@@ -1,4 +1,4 @@
-import Button from ".";
+import Button from "./styles";
 import { render, screen } from "@testing-library/react";
 
 describe("Button", () => {
