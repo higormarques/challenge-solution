@@ -1,5 +1,6 @@
 import Router from "~/router";
 import { Header } from "./components/Header";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 
 
@@ -18,6 +19,7 @@ function App() {
         <h1>Caju Front Teste</h1>
       </Header>
       <Router />
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
