@@ -1,6 +1,7 @@
 
 import * as S from "./styles";
 import RegistrationCard from "../RegistrationCard";
+import { Registration } from "~/hooks/useFetchRegistrations";
 
 const allColumns = [
   { status: 'REVIEW', title: "Pronto para revisar" },
@@ -8,10 +9,11 @@ const allColumns = [
   { status: 'REPROVED', title: "Reprovado" },
 ];
 
-type Props = {
-  registrations?: any[];
+type CollumnsProps = {
+  registrations?: Registration[];
 };
-const Collumns = (props: Props) => {
+
+const Collumns = (props: CollumnsProps) => {
   return (
     <S.Container>
       {allColumns.map((collum) => {
@@ -23,12 +25,16 @@ const Collumns = (props: Props) => {
               </S.TitleColumn>
               <S.CollumContent>
                 {props?.registrations?.map((registration) => {
-                  return (
-                    <RegistrationCard
-                      data={registration}
-                      key={registration.id}
-                    />
-                  );
+                  if (registration.status === collum.status) {
+                    return (
+                      <RegistrationCard
+                        data={registration}
+                        key={registration.id}
+                      />
+                    );
+                  }
+
+                  return null
                 })}
               </S.CollumContent>
             </>

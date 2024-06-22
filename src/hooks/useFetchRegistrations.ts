@@ -1,6 +1,6 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-interface Registration {
+export interface Registration {
   id: number;
   admissionDate: string;
   email: string;
@@ -9,8 +9,8 @@ interface Registration {
   cpf: string;
 }
 
-const fetchRegistrations = async (cpf?: string | undefined): Promise<Registration[]> => {
-  const query = cpf?.length ? `?cpf=${cpf}` : '';
+const fetchRegistrations = async (urlQuery: string): Promise<Registration[]> => {
+  const query = urlQuery?.length ? `?cpf=${urlQuery}` : '';
 
   const response = await fetch(`http://localhost:3000/registrations${query}`, {
     method: 'GET',
@@ -23,7 +23,7 @@ const fetchRegistrations = async (cpf?: string | undefined): Promise<Registratio
 
 export const useFetchRegistrations = (cpf: string): UseQueryResult => {
   return useQuery({
-    queryKey: ['registrations'],
+    queryKey: ['registrations', cpf],
     queryFn: () => fetchRegistrations(cpf),
   });
 };

@@ -8,6 +8,11 @@ module.exports = {
     'eslint-config-prettier',
     "plugin:react-hooks/recommended"
   ],
+  env: {
+    browser: true,
+    es2021: true,
+    node: true,
+  },
   settings: {
     react: {
       version: 'detect',

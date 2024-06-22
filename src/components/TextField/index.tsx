@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes } from "react";
 import styled from "styled-components";
 
 export const Input = styled.input`
@@ -20,17 +20,17 @@ export const Input = styled.input`
     box-shadow: inset 0 0 0 1px #007c89;
   }
 `;
-type Props = {
+type TextFieldProps = {
   label?: string;
   error?: string;
 } & InputHTMLAttributes<any>;
 
-const TextField = (props: Props) => {
+const TextField = (props: TextFieldProps) => {
   return (
     <div>
       <label htmlFor={props.id}>{props.label}</label>
       <Input {...props} />
-      <span style={{fontSize: 12, color: 'red'}}>{props.error}</span>
+      <span style={{ fontSize: 12, color: 'red' }}>{props.error}</span>
     </div>
   );
 };
