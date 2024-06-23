@@ -1,10 +1,9 @@
-// src/hooks/useUpdateStatus.ts
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Registration } from '~/types/types';
 
 
 
-const updateStatus = async (registration: Registration): Promise<unknown> => {
+const updateRegistration = async (registration: Registration): Promise<unknown> => {
     const { id } = registration;
     const response = await fetch(`http://localhost:3000/registrations/${id}`, {
         method: 'PUT',
@@ -21,16 +20,16 @@ const updateStatus = async (registration: Registration): Promise<unknown> => {
     return response.json();
 };
 
-const useUpdateStatus = () => {
+const useUpdateRegistration = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: updateStatus,
+        mutationFn: updateRegistration,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['registrations'] });
         },
     });
 };
 
-export default useUpdateStatus;
+export default useUpdateRegistration;
 

@@ -13,7 +13,7 @@ import {
 } from "react-icons/hi";
 import { RegistrationCardProps, DialogData } from "./RegistrationCard.types";
 import Dialog from "~/components/Dialog";
-import useUpdateStatus from "~/hooks/useUpdateStatus";
+import useUpdateRegistration from "~/hooks/useUpdateRegistration";
 import useDeleteRegistration from "~/hooks/useDeleteRegistration";
 import { RegistrationStatus } from "~/types/enums";
 
@@ -31,7 +31,7 @@ const RegistrationCard = ({ data }: RegistrationCardProps) => {
 
   const { title, message } = dialogData;
 
-  const updateMutation = useUpdateStatus();
+  const updateMutation = useUpdateRegistration();
   const deleteMutation = useDeleteRegistration();
 
   const handleDialog = (status: string) => {

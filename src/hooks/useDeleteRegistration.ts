@@ -1,4 +1,3 @@
-// src/hooks/useDeleteRegistration.ts
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const deleteRegistration = async (id: number) => {
