@@ -13,9 +13,11 @@ const fetchRegistrations = async (cpf: string): Promise<Registration[]> => {
   return response.json() as Promise<Registration[]>;
 };
 
-export const useFetchRegistrations = (cpf: string): UseQueryResult => {
+const useFetchRegistrations = (cpf: string): UseQueryResult => {
   return useQuery({
     queryKey: ['registrations', cpf],
     queryFn: () => fetchRegistrations(cpf),
   });
 };
+
+export default useFetchRegistrations;
