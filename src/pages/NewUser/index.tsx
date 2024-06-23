@@ -1,8 +1,10 @@
 import TextField from "~/components/TextField";
-import * as S from "./styles";
-import Button from "~/components/Buttons/styles";
+import {
+  Container,
+  Card
+} from "./NewUser.styles";
 import { HiOutlineArrowLeft } from "react-icons/hi";
-import { IconButton } from "~/components/Buttons/IconButton";
+import Button, { IconButton } from "~/components/Buttons";
 import { useHistory } from "react-router-dom";
 import routes from "~/router/routes";
 
@@ -13,8 +15,8 @@ const NewUserPage = () => {
   };
 
   return (
-    <S.Container>
-      <S.Card>
+    <Container>
+      <Card>
         <IconButton onClick={() => goToHome()} aria-label="back">
           <HiOutlineArrowLeft size={24} />
         </IconButton>
@@ -22,9 +24,9 @@ const NewUserPage = () => {
         <TextField placeholder="Email" label="Email" type="email" />
         <TextField placeholder="CPF" label="CPF" />
         <TextField label="Data de admissão" type="date" />
-        <Button onClick={() => {}}>Cadastrar</Button>
-      </S.Card>
-    </S.Container>
+        <Button onClick={() => { }}>Cadastrar</Button>
+      </Card>
+    </Container>
   );
 };
 

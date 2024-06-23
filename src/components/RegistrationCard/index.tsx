@@ -1,39 +1,43 @@
-import { ButtonSmall } from "~/components/Buttons/styles";
-import * as S from "./styles";
+import { ButtonSmall } from "~/components/Buttons";
+import {
+  Card,
+  IconAndText,
+  Actions
+} from "./RegistrationCard.styles";
 import {
   HiOutlineMail,
   HiOutlineUser,
   HiOutlineCalendar,
   HiOutlineTrash,
 } from "react-icons/hi";
+import { RegistrationCardProps } from "./RegistrationCard.types";
 
-type Props = {
-  data: any;
-};
-
-const RegistrationCard = (props: Props) => {
+const RegistrationCard = (props: RegistrationCardProps) => {
   return (
-    <S.Card>
-      <S.IconAndText>
+    <Card>
+      <IconAndText>
         <HiOutlineUser />
         <h3>{props.data.employeeName}</h3>
-      </S.IconAndText>
-      <S.IconAndText>
+      </IconAndText>
+
+      <IconAndText>
         <HiOutlineMail />
         <p>{props.data.email}</p>
-      </S.IconAndText>
-      <S.IconAndText>
+      </IconAndText>
+
+      <IconAndText>
         <HiOutlineCalendar />
         <span>{props.data.admissionDate}</span>
-      </S.IconAndText>
-      <S.Actions>
+      </IconAndText>
+
+      <Actions>
         <ButtonSmall bgcolor="rgb(255, 145, 154)" >Reprovar</ButtonSmall>
         <ButtonSmall bgcolor="rgb(155, 229, 155)">Aprovar</ButtonSmall>
         <ButtonSmall bgcolor="#ff8858">Revisar novamente</ButtonSmall>
 
         <HiOutlineTrash />
-      </S.Actions>
-    </S.Card>
+      </Actions>
+    </Card>
   );
 };
 

@@ -1,5 +1,10 @@
 
-import * as S from "./styles";
+import {
+  Column,
+  ColumnContent,
+  TitleColumn,
+  Container,
+} from "./Columns.styles";
 import RegistrationCard from "../RegistrationCard";
 import { Registration } from "~/hooks/useFetchRegistrations";
 
@@ -9,21 +14,21 @@ const allColumns = [
   { status: 'REPROVED', title: "Reprovado" },
 ];
 
-type CollumnsProps = {
+type ColumnsProps = {
   registrations?: Registration[];
 };
 
-const Collumns = (props: CollumnsProps) => {
+const Collumns = (props: ColumnsProps) => {
   return (
-    <S.Container>
+    <Container>
       {allColumns.map((collum) => {
         return (
-          <S.Column status={collum.status} key={collum.title}>
+          <Column status={collum.status} key={collum.title}>
             <>
-              <S.TitleColumn status={collum.status}>
+              <TitleColumn status={collum.status}>
                 {collum.title}
-              </S.TitleColumn>
-              <S.CollumContent>
+              </TitleColumn>
+              <ColumnContent>
                 {props?.registrations?.map((registration) => {
                   if (registration.status === collum.status) {
                     return (
@@ -36,12 +41,12 @@ const Collumns = (props: CollumnsProps) => {
 
                   return null
                 })}
-              </S.CollumContent>
+              </ColumnContent>
             </>
-          </S.Column>
+          </Column>
         );
       })}
-    </S.Container>
+    </Container>
   );
 };
 export default Collumns;

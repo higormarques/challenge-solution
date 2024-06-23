@@ -1,5 +1,7 @@
 import Collumns from "~/components/Columns";
-import * as S from "./styles";
+import {
+  Container,
+} from "./Dashboard.styles";
 import { SearchBar } from "~/components/Searchbar";
 import { useFetchRegistrations, Registration } from "~/hooks/useFetchRegistrations";
 import { useState } from "react";
@@ -18,13 +20,13 @@ const DashboardPage = () => {
   }
 
   return (
-    <S.Container>
+    <Container>
       <SearchBar handleSearch={handleSearch} />
 
       {registrationsIsLoading && <p>Carregando...</p>}
 
       {registrationsData && <Collumns registrations={registrationsData} />}
-    </S.Container>
+    </Container>
   );
 };
 export default DashboardPage;
