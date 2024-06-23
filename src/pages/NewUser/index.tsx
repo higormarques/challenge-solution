@@ -39,10 +39,11 @@ const NewUserPage = () => {
       status: RegistrationStatus.Review,
     }
 
-    mutation.mutate(formatedData);
-
-    if (mutation.isSuccess) goToHome();
-    if (mutation.isError) alert('Erro ao cadastrar usuário');
+    mutation.mutate(formatedData, {
+      onSuccess: () => {
+        goToHome();
+      },
+    });
   };
 
   return (
