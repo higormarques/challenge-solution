@@ -7,17 +7,31 @@ import {
   Container,
   Actions,
 } from "./Searchbar.styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { maskCPF, validateCPF } from "~/utils/cpf-utils";
 import { useQueryClient } from "@tanstack/react-query";
-import { SearchBarProps, InputData } from "./Searchbar.types";
+import { SearchBarProps } from "./Searchbar.types";
+import useDebounce from "~/hooks/useDebounce";
 
 const MAX_FORMATED_CPF_LENGTH = 14;
 
 export const SearchBar = ({ handleSearch }: SearchBarProps) => {
-  const [inputData, setInputData] = useState<InputData>({ value: '', error: '' });
+  const [inputValue, setInputValue] = useState<string>('');
+  const [inputError, setInputError] = useState<string>('');
   const history = useHistory();
   const queryClient = useQueryClient()
+
+  const debouncedSearchInputValue = useDebounce(inputValue.replace(/[.-]/g, ''), 600);
+
+  useEffect(() => {
+    if (!validateCPF(debouncedSearchInputValue) && debouncedSearchInputValue.length !== 0) {
+      setInputError('CPF inválido');
+      return
+    }
+
+    setInputError('');
+    handleSearch(debouncedSearchInputValue);
+  }, [debouncedSearchInputValue, handleSearch])
 
 
   const goToNewAdmissionPage = () => {
@@ -25,18 +39,10 @@ export const SearchBar = ({ handleSearch }: SearchBarProps) => {
   };
 
   const handleChage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const searchText = event.target.value;
+    const searchText = maskCPF(event.target.value);
 
-    setInputData({
-      ...inputData,
-      value: maskCPF(searchText)
-    });
+    setInputValue(searchText);
 
-    if ((searchText.length < MAX_FORMATED_CPF_LENGTH && searchText.length > 0)) return
-
-    if (!validateCPF(searchText) && searchText.length !== 0) return
-
-    handleSearch(searchText);
   }
 
   const refetch = () => {
@@ -45,12 +51,12 @@ export const SearchBar = ({ handleSearch }: SearchBarProps) => {
 
   return (
     <Container>
-      <TextField placeholder="Digite um CPF válido" onChange={handleChage} value={inputData.value} maxLength={MAX_FORMATED_CPF_LENGTH} />
+      <TextField placeholder="Digite um CPF válido" onInput={handleChage} value={inputValue} maxLength={MAX_FORMATED_CPF_LENGTH} error={inputError} />
       <Actions>
         <IconButton aria-label="refetch" onClick={refetch}>
           <HiRefresh />
         </IconButton>
-        <Button onClick={() => goToNewAdmissionPage()}>Nova Admissão</Button>
+        <Button onClick={() => goToNewAdmissionPage()} >Nova Admissão</Button>
       </Actions>
     </Container>
   );
