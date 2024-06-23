@@ -15,7 +15,7 @@ import { SearchBarProps, InputData } from "./Searchbar.types";
 const MAX_FORMATED_CPF_LENGTH = 14;
 
 export const SearchBar = ({ handleSearch }: SearchBarProps) => {
-  const [inputData, setInputValue] = useState<InputData>({ value: '', error: '' });
+  const [inputData, setInputData] = useState<InputData>({ value: '', error: '' });
   const history = useHistory();
   const queryClient = useQueryClient()
 
@@ -27,21 +27,14 @@ export const SearchBar = ({ handleSearch }: SearchBarProps) => {
   const handleChage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchText = event.target.value;
 
-    setInputValue({
+    setInputData({
       ...inputData,
       value: maskCPF(searchText)
     });
 
-    if (!validateCPF(searchText) && searchText.length < MAX_FORMATED_CPF_LENGTH && searchText.length !== 0) return
+    if ((searchText.length < MAX_FORMATED_CPF_LENGTH && searchText.length > 0)) return
 
-    // if (!validateCPF(searchText) && searchText.length === MAX_FORMATED_CPF_LENGTH) {
-    //   setInputValue({
-    //     ...inputData,
-    //     error: 'CPF inválido'
-    //   });
-
-    //   return
-    // };
+    if (!validateCPF(searchText) && searchText.length !== 0) return
 
     handleSearch(searchText);
   }

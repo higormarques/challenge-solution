@@ -6,12 +6,13 @@ import {
   Container,
 } from "./Columns.styles";
 import RegistrationCard from "../RegistrationCard";
-import { Registration } from "~/hooks/useFetchRegistrations";
+import { Registration } from "~/types/types";
+import { RegistrationStatus } from "~/types/enums";
 
 const allColumns = [
-  { status: 'REVIEW', title: "Pronto para revisar" },
-  { status: 'APPROVED', title: "Aprovado" },
-  { status: 'REPROVED', title: "Reprovado" },
+  { status: RegistrationStatus.Review, title: "Pronto para revisar" },
+  { status: RegistrationStatus.Approved, title: "Aprovado" },
+  { status: RegistrationStatus.Reproved, title: "Reprovado" },
 ];
 
 type ColumnsProps = {

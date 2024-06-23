@@ -1,16 +1,8 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { Registration } from '~/types/types';
 
-export interface Registration {
-  id: number;
-  admissionDate: string;
-  email: string;
-  employeeName: string;
-  status: string;
-  cpf: string;
-}
-
-const fetchRegistrations = async (urlQuery: string): Promise<Registration[]> => {
-  const query = urlQuery?.length ? `?cpf=${urlQuery}` : '';
+const fetchRegistrations = async (cpf: string): Promise<Registration[]> => {
+  const query = cpf?.length ? `?cpf=${cpf}` : '';
 
   const response = await fetch(`http://localhost:3000/registrations${query}`, {
     method: 'GET',

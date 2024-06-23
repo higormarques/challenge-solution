@@ -3,8 +3,10 @@ import {
   Container,
 } from "./Dashboard.styles";
 import { SearchBar } from "~/components/Searchbar";
-import { useFetchRegistrations, Registration } from "~/hooks/useFetchRegistrations";
+import { useFetchRegistrations } from "~/hooks/useFetchRegistrations";
+import { Registration } from "~/types/types";
 import { useState } from "react";
+import useDebounce from "~/hooks/useDebounce";
 
 interface RegistrationFetchResponse {
   data: Registration[];
@@ -13,10 +15,11 @@ interface RegistrationFetchResponse {
 
 const DashboardPage = () => {
   const [searchInputValue, setSearchInputValue] = useState<string>('');
-  const { data: registrationsData, isLoading: registrationsIsLoading } = useFetchRegistrations(searchInputValue) as RegistrationFetchResponse;
+  const debouncedSearchInputValue = useDebounce(searchInputValue.replace(/[.-]/g, ''), 600);
+  const { data: registrationsData, isLoading: registrationsIsLoading } = useFetchRegistrations(debouncedSearchInputValue) as RegistrationFetchResponse;
 
-  const handleSearch = (cpf: string) => {
-    setSearchInputValue(cpf);
+  const handleSearch = (value: string) => {
+    setSearchInputValue(value);
   }
 
   return (
