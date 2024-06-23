@@ -23,13 +23,16 @@ const RegistrationCard = ({ data }: RegistrationCardProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogData, setDialogData] = useState<DialogData>({ title: '', message: '', status: '' });
 
+  const DELETE_STATUS = 'DELETE';
+
   const actions: Record<string, string> = {
     [RegistrationStatus.Review]: 'revisar novamente',
     [RegistrationStatus.Approved]: 'aprovar',
     [RegistrationStatus.Reproved]: 'reprovar',
+    [DELETE_STATUS]: 'excluir'
   }
 
-  const { title, message } = dialogData;
+  const { title, message, status } = dialogData;
 
   const updateMutation = useUpdateRegistration();
   const deleteMutation = useDeleteRegistration();
@@ -74,13 +77,16 @@ const RegistrationCard = ({ data }: RegistrationCardProps) => {
           <ButtonSmall bgcolor="rgb(155, 229, 155)" onClick={() => handleDialog(RegistrationStatus.Approved)}>Aprovar</ButtonSmall>
           {data.status !== 'REVIEW' && <ButtonSmall bgcolor="#ff8858" onClick={() => handleDialog(RegistrationStatus.Review)}>Revisar novamente</ButtonSmall>}
 
-          <HiOutlineTrash onClick={handleDeleteRegistration} />
+          <HiOutlineTrash onClick={() => handleDialog(DELETE_STATUS)} />
         </Actions>
       </Card>
 
       <Dialog title={title} isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
         <p>{message}</p>
-        <Button onClick={handleUpdateStatus}>Confirmar</Button>
+        {status !== DELETE_STATUS
+          ? <Button onClick={handleUpdateStatus}>Confirmar</Button>
+          : <Button onClick={handleDeleteRegistration}>Excluir</Button>
+        }
       </Dialog>
     </>
   );
