@@ -19,7 +19,7 @@ import { RegistrationStatus } from "~/types/enums";
 
 
 const RegistrationCard = ({ data }: RegistrationCardProps) => {
-  const { employeeName, email, admissionDate, id } = data;
+  const { employeeName, email, admissionDate, id, status: dataStatus } = data;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogData, setDialogData] = useState<DialogData>({ title: '', message: '', status: '' });
 
@@ -73,9 +73,15 @@ const RegistrationCard = ({ data }: RegistrationCardProps) => {
         </IconAndText>
 
         <Actions>
-          <ButtonSmall bgcolor="rgb(255, 145, 154)" onClick={() => handleDialog(RegistrationStatus.Reproved)}>Reprovar</ButtonSmall>
-          <ButtonSmall bgcolor="rgb(155, 229, 155)" onClick={() => handleDialog(RegistrationStatus.Approved)}>Aprovar</ButtonSmall>
-          {data.status !== 'REVIEW' && <ButtonSmall bgcolor="#ff8858" onClick={() => handleDialog(RegistrationStatus.Review)}>Revisar novamente</ButtonSmall>}
+          {dataStatus === RegistrationStatus.Review && (
+            <>
+              <ButtonSmall bgcolor="rgb(255, 145, 154)" onClick={() => handleDialog(RegistrationStatus.Reproved)}>Reprovar</ButtonSmall>
+
+              <ButtonSmall bgcolor="rgb(155, 229, 155)" onClick={() => handleDialog(RegistrationStatus.Approved)}>Aprovar</ButtonSmall>
+            </>
+          )}
+
+          {dataStatus !== RegistrationStatus.Review && <ButtonSmall bgcolor="#ff8858" onClick={() => handleDialog(RegistrationStatus.Review)}>Revisar novamente</ButtonSmall>}
 
           <HiOutlineTrash onClick={() => handleDialog(DELETE_STATUS)} />
         </Actions>
