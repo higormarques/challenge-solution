@@ -1,4 +1,3 @@
-// src/components/Dialog/Dialog.tsx
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { DialogProps } from './Dialog.types';
@@ -20,19 +19,6 @@ const Dialog = ({ isOpen, onClose, title, children }: DialogProps) => {
             dialogRef.current.focus();
         }
     }, [isOpen]);
-
-    // useEffect(() => {
-    //     const handleKeyDown = (event: KeyboardEvent) => {
-    //         if (event.key === 'Escape') {
-    //             onClose();
-    //         }
-    //     };
-
-    //     document.addEventListener('keydown', handleKeyDown);
-    //     return () => {
-    //         document.removeEventListener('keydown', handleKeyDown);
-    //     };
-    // }, [onClose]);
 
     if (!isOpen) return null;
 
