@@ -1,4 +1,3 @@
-// src/hooks/useAddRegistration.test.ts
 import { renderHook, act } from '@testing-library/react-hooks';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import useAddRegistration from './';

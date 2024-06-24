@@ -1,4 +1,3 @@
-// src/utils/cpfUtils.test.ts
 import { validateCPF, maskCPF } from './cpf-utils';
 
 describe('validateCPF', () => {

@@ -42,7 +42,6 @@ describe('useDeleteRegistration', () => {
     });
 
     it('handles error on deletion failure', async () => {
-        // Mock para fetch com erro
         (fetch as jest.Mock).mockResolvedValueOnce({
             ok: false,
         });

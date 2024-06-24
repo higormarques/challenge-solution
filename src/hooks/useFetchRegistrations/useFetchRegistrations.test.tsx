@@ -1,4 +1,3 @@
-// src/hooks/useFetchRegistrations.test.ts
 import { renderHook, act } from '@testing-library/react-hooks';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import useFetchRegistrations from './';
