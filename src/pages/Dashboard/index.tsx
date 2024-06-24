@@ -2,7 +2,7 @@ import Collumns from "~/components/Columns";
 import {
   Container,
 } from "./Dashboard.styles";
-import { SearchBar } from "~/components/Searchbar";
+import SearchBar from "~/components/SearchBar";
 import useFetchRegistrations from "~/hooks/useFetchRegistrations";
 import { Registration } from "~/types/types";
 import { useState } from "react";

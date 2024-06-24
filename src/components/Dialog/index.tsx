@@ -7,7 +7,7 @@ import {
     Header,
     Title,
     CloseButton,
-    Body,
+    Content,
 } from './Dialog.styles';
 
 const Dialog = ({ isOpen, onClose, title, children }: DialogProps) => {
@@ -41,7 +41,7 @@ const Dialog = ({ isOpen, onClose, title, children }: DialogProps) => {
                         &times;
                     </CloseButton>
                 </Header>
-                <Body>{children}</Body>
+                <Content>{children}</Content>
             </DialogContainer>
         </Overlay>,
         document.body

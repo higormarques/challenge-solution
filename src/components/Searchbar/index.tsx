@@ -6,16 +6,16 @@ import routes from "~/router/routes";
 import {
   Container,
   Actions,
-} from "./Searchbar.styles";
+} from "./SearchBar.styles";
 import { useEffect, useState } from "react";
 import { maskCPF, validateCPF } from "~/utils/cpf-utils";
 import { useQueryClient } from "@tanstack/react-query";
-import { SearchBarProps } from "./Searchbar.types";
+import { SearchBarProps } from "./SearchBar.types";
 import useDebounce from "~/hooks/useDebounce";
 
 const MAX_FORMATED_CPF_LENGTH = 14;
 
-export const SearchBar = ({ handleSearch }: SearchBarProps) => {
+const SearchBar = ({ handleSearch }: SearchBarProps) => {
   const [inputValue, setInputValue] = useState<string>('');
   const [inputError, setInputError] = useState<string>('');
   const history = useHistory();
@@ -61,3 +61,5 @@ export const SearchBar = ({ handleSearch }: SearchBarProps) => {
     </Container>
   );
 };
+
+export default SearchBar;

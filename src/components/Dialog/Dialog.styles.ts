@@ -40,6 +40,6 @@ export const CloseButton = styled.button`
   cursor: pointer;
 `;
 
-export const Body = styled.div`
+export const Content = styled.div`
   margin-top: 1rem;
 `;
