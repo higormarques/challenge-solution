@@ -6,6 +6,7 @@ import SearchBar from "~/components/SearchBar";
 import useFetchRegistrations from "~/hooks/useFetchRegistrations";
 import { Registration } from "~/types/types";
 import { useState } from "react";
+import Loading from "~/components/Loading";
 
 interface RegistrationFetchResponse {
   data: Registration[];
@@ -24,7 +25,7 @@ const DashboardPage = () => {
     <Container>
       <SearchBar handleSearch={handleSearch} />
 
-      {registrationsIsLoading && <p>Carregando...</p>}
+      {registrationsIsLoading && <Loading />}
 
       {registrationsData && <Collumns registrations={registrationsData} />}
     </Container>
