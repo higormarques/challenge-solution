@@ -9,6 +9,7 @@ import { validateCPF, maskCPF } from "~/utils/cpf-utils";
 import useAddRegistration from "~/hooks/useAddRegistration";
 import { RegistrationStatus } from "~/types/enums";
 import { RegistrationFormPayload } from "~/types/types";
+import { useNotification } from "~/hooks/useNotification";
 
 const NewUserPage = () => {
   const history = useHistory();
@@ -24,6 +25,8 @@ const NewUserPage = () => {
     formState: { errors },
     setValue
   } = useForm<RegistrationFormPayload>();
+
+  const { notify } = useNotification();
 
 
   const handleCPFChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,8 +44,12 @@ const NewUserPage = () => {
 
     mutation.mutate(formatedData, {
       onSuccess: () => {
+        notify('Cadastro realizado com sucesso', 'success');
         goToHome();
       },
+      onError: () => {
+        notify('Erro ao cadastrar usuário', 'error');
+      }
     });
   };
 

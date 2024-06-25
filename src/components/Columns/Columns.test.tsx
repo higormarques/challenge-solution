@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Collumns from './';
+import Columns from './';
 import { Registration } from '~/types/types';
 import { RegistrationStatus } from '~/types/enums';
+import { NotificationProvider } from '~/hooks/useNotification';
 
 const mockRegistrations: Registration[] = [
     {
@@ -31,16 +32,19 @@ const mockRegistrations: Registration[] = [
     },
 ];
 
+const queryClient = new QueryClient();
+
 const createWrapper = () => {
-    const queryClient = new QueryClient();
     return ({ children }: { children: React.ReactNode }) => (
-        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+        <QueryClientProvider client={queryClient}>
+            <NotificationProvider>{children}</NotificationProvider>
+        </QueryClientProvider>
     );
 };
 
-describe('Collumns', () => {
+describe('Columns', () => {
     it('should render the columns with titles', () => {
-        render(<Collumns registrations={mockRegistrations} />, { wrapper: createWrapper() });
+        render(<Columns registrations={mockRegistrations} />, { wrapper: createWrapper() });
 
         expect(screen.getByText('Pronto para revisar')).toBeInTheDocument();
         expect(screen.getByText('Aprovado')).toBeInTheDocument();
@@ -48,7 +52,7 @@ describe('Collumns', () => {
     });
 
     it('should render the correct number of registration cards in each column', () => {
-        render(<Collumns registrations={mockRegistrations} />, { wrapper: createWrapper() });
+        render(<Columns registrations={mockRegistrations} />, { wrapper: createWrapper() });
 
         expect(screen.getByText('John Doe')).toBeInTheDocument();
         expect(screen.getByText('Jane Doe')).toBeInTheDocument();
@@ -56,7 +60,7 @@ describe('Collumns', () => {
     });
 
     it('should render registration cards in the correct columns based on their status', () => {
-        render(<Collumns registrations={mockRegistrations} />, { wrapper: createWrapper() });
+        render(<Columns registrations={mockRegistrations} />, { wrapper: createWrapper() });
 
         const reviewColumn = screen.getByText('Pronto para revisar').closest('div');
         const approvedColumn = screen.getByText('Aprovado').closest('div');
@@ -68,7 +72,7 @@ describe('Collumns', () => {
     });
 
     it('should not render any registration cards if no registrations are provided', () => {
-        render(<Collumns registrations={[]} />, { wrapper: createWrapper() });
+        render(<Columns registrations={[]} />, { wrapper: createWrapper() });
 
         expect(screen.queryByText('John Doe')).not.toBeInTheDocument();
         expect(screen.queryByText('Jane Doe')).not.toBeInTheDocument();

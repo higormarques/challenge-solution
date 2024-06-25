@@ -2,7 +2,7 @@ import { Input } from "./TextField.styles";
 import { TextFieldProps } from "./TextField.types";
 import { forwardRef } from "react";
 
-const TextField = forwardRef((props: TextFieldProps, ref) => {
+const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props: TextFieldProps, ref) => {
   return (
     <div>
       <label htmlFor={props.id}>{props.label}</label>

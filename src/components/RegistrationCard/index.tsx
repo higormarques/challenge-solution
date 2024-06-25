@@ -16,12 +16,15 @@ import Dialog from "~/components/Dialog";
 import useUpdateRegistration from "~/hooks/useUpdateRegistration";
 import useDeleteRegistration from "~/hooks/useDeleteRegistration";
 import { RegistrationStatus } from "~/types/enums";
+import { useNotification } from "~/hooks/useNotification";
 
 
 const RegistrationCard = ({ data }: RegistrationCardProps) => {
   const { employeeName, email, admissionDate, id, status: dataStatus } = data;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogData, setDialogData] = useState<DialogData>({ title: '', message: '', status: '' });
+
+  const { notify } = useNotification();
 
   const DELETE_STATUS = 'DELETE';
 
@@ -47,11 +50,27 @@ const RegistrationCard = ({ data }: RegistrationCardProps) => {
   }
 
   const handleUpdateStatus = () => {
-    updateMutation.mutate({ ...data, status: dialogData.status });
+    updateMutation.mutate({ ...data, status: dialogData.status }, {
+      onSuccess: () => {
+        notify(`Solicitação para ${actions[dialogData.status]} finalizada com sucesso`, 'success');
+      },
+      onError: () => {
+        notify(`Erro ao ${actions[dialogData.status]} a inscrição`, 'error');
+      }
+    });
   };
 
   const handleDeleteRegistration = () => {
-    deleteMutation.mutate(id);
+    deleteMutation.mutate(id,
+      {
+        onSuccess: () => {
+          notify('Inscrição excluída com sucesso', 'success');
+        },
+        onError: () => {
+          notify('Erro ao excluir a inscrição', 'error');
+        }
+      }
+    );
   };
 
   return (
@@ -81,9 +100,9 @@ const RegistrationCard = ({ data }: RegistrationCardProps) => {
             </>
           )}
 
-          {dataStatus !== RegistrationStatus.Review && <ButtonSmall bgcolor="#ff8858" onClick={() => handleDialog(RegistrationStatus.Review)}>Revisar novamente</ButtonSmall>}
+          {dataStatus !== RegistrationStatus.Review && <ButtonSmall data-testid="revisar-novamente" bgcolor="#ff8858" onClick={() => handleDialog(RegistrationStatus.Review)}>Revisar novamente</ButtonSmall>}
 
-          <HiOutlineTrash onClick={() => handleDialog(DELETE_STATUS)} />
+          <HiOutlineTrash data-testid="trash-icon" onClick={() => handleDialog(DELETE_STATUS)} />
         </Actions>
       </Card>
 
