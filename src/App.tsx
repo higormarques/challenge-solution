@@ -2,6 +2,8 @@ import Router from "~/router";
 import Header from "./components/Header";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
+const ENABLE_DEV_TOOLS = import.meta.env.MODE === 'development'
+
 import {
   QueryClient,
   QueryClientProvider,
@@ -22,7 +24,8 @@ function App() {
         </Header>
         <Router />
         <Notification />
-        <ReactQueryDevtools initialIsOpen={false} />
+
+        {ENABLE_DEV_TOOLS && <ReactQueryDevtools initialIsOpen={false} />}
       </QueryClientProvider>
     </NotificationProvider>
   );
