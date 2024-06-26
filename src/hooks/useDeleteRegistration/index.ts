@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+const API_URL = import.meta.env.VITE_JSON_DB_API_URL;
+
 const deleteRegistration = async (id: number) => {
-    const response = await fetch(`http://localhost:3000/registrations/${id}`, {
+    const response = await fetch(`${API_URL}/registrations/${id}`, {
         method: 'DELETE',
     });
 

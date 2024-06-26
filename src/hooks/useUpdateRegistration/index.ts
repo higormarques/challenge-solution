@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Registration } from '~/types/types';
 
-
+const API_URL = import.meta.env.VITE_JSON_DB_API_URL;
 
 const updateRegistration = async (registration: Registration): Promise<unknown> => {
     const { id } = registration;
-    const response = await fetch(`http://localhost:3000/registrations/${id}`, {
+    const response = await fetch(`${API_URL}/registrations/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

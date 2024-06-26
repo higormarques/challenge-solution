@@ -1,8 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { RegistrationFormPayload } from '~/types/types';
 
+const API_URL = import.meta.env.VITE_JSON_DB_API_URL;
+
 const addRegistration = async (registration: RegistrationFormPayload) => {
-    const response = await fetch('http://localhost:3000/registrations', {
+    const response = await fetch(`${API_URL}/registrations`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
