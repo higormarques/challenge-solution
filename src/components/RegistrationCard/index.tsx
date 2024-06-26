@@ -64,6 +64,8 @@ const RegistrationCard = ({ data }: RegistrationCardProps) => {
   };
 
   const handleDeleteRegistration = () => {
+    setIsDialogOpen(false);
+
     deleteMutate(id,
       {
         onSuccess: () => {
@@ -77,48 +79,48 @@ const RegistrationCard = ({ data }: RegistrationCardProps) => {
   };
 
   return (
-    <>
-      <Card>
-        <IconAndText>
-          <HiOutlineUser />
-          <h3>{employeeName}</h3>
-        </IconAndText>
+    updateLoading || deleteLoading
+      ? <Loading />
+      : <>
+        <Card>
+          <IconAndText>
+            <HiOutlineUser />
+            <h3>{employeeName}</h3>
+          </IconAndText>
 
-        <IconAndText>
-          <HiOutlineMail />
-          <p>{email}</p>
-        </IconAndText>
+          <IconAndText>
+            <HiOutlineMail />
+            <p>{email}</p>
+          </IconAndText>
 
-        <IconAndText>
-          <HiOutlineCalendar />
-          <span>{admissionDate}</span>
-        </IconAndText>
+          <IconAndText>
+            <HiOutlineCalendar />
+            <span>{admissionDate}</span>
+          </IconAndText>
 
-        <Actions>
-          {dataStatus === RegistrationStatus.Review && (
-            <>
-              <ButtonSmall bgcolor="rgb(255, 145, 154)" onClick={() => handleDialog(RegistrationStatus.Reproved)}>Reprovar</ButtonSmall>
+          <Actions>
+            {dataStatus === RegistrationStatus.Review && (
+              <>
+                <ButtonSmall bgcolor="rgb(255, 145, 154)" onClick={() => handleDialog(RegistrationStatus.Reproved)}>Reprovar</ButtonSmall>
 
-              <ButtonSmall bgcolor="rgb(155, 229, 155)" onClick={() => handleDialog(RegistrationStatus.Approved)}>Aprovar</ButtonSmall>
-            </>
-          )}
+                <ButtonSmall bgcolor="rgb(155, 229, 155)" onClick={() => handleDialog(RegistrationStatus.Approved)}>Aprovar</ButtonSmall>
+              </>
+            )}
 
-          {dataStatus !== RegistrationStatus.Review && <ButtonSmall data-testid="revisar-novamente" bgcolor="#ff8858" onClick={() => handleDialog(RegistrationStatus.Review)}>Revisar novamente</ButtonSmall>}
+            {dataStatus !== RegistrationStatus.Review && <ButtonSmall data-testid="revisar-novamente" bgcolor="#ff8858" onClick={() => handleDialog(RegistrationStatus.Review)}>Revisar novamente</ButtonSmall>}
 
-          <HiOutlineTrash data-testid="trash-icon" onClick={() => handleDialog(DELETE_STATUS)} />
-        </Actions>
-      </Card>
+            <HiOutlineTrash data-testid="trash-icon" onClick={() => handleDialog(DELETE_STATUS)} />
+          </Actions>
+        </Card>
 
-      <Dialog title={title} isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
-        <p>{message}</p>
-        {status !== DELETE_STATUS
-          ? <Button onClick={handleUpdateStatus}>Confirmar</Button>
-          : <Button onClick={handleDeleteRegistration}>Excluir</Button>
-        }
-      </Dialog>
-
-      {updateLoading || deleteLoading && <Loading />}
-    </>
+        <Dialog title={title} isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+          <p>{message}</p>
+          {status !== DELETE_STATUS
+            ? <Button onClick={handleUpdateStatus}>Confirmar</Button>
+            : <Button onClick={handleDeleteRegistration}>Excluir</Button>
+          }
+        </Dialog>
+      </>
   );
 };
 
