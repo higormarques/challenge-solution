@@ -1,5 +1,5 @@
 import Router from "~/router";
-import { Header } from "./components/Header";
+import Header from "./components/Header";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import {

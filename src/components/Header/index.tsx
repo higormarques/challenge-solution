@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Header = styled.header`
+const Header = styled.header`
   background: rgb(255, 117, 0);
   background: linear-gradient(
     258deg,
@@ -20,3 +20,5 @@ export const Header = styled.header`
     font-size: 24px;
   }
 `;
+
+export default Header;

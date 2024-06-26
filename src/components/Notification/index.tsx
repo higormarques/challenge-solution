@@ -5,7 +5,7 @@ const Notification = () => {
     const { notifications } = useNotification();
 
     return (
-        <NotificationContainer>
+        <NotificationContainer data-testid="notification-container">
             {notifications.map(notification => (
                 <NotificationItem
                     key={notification.id}
