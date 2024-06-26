@@ -10,10 +10,11 @@ import useAddRegistration from "~/hooks/useAddRegistration";
 import { RegistrationStatus } from "~/types/enums";
 import { RegistrationFormPayload } from "~/types/types";
 import { useNotification } from "~/hooks/useNotification";
+import Loading from "~/components/Loading";
 
 const NewUserPage = () => {
   const history = useHistory();
-  const mutation = useAddRegistration();
+  const { mutate, isPending } = useAddRegistration();
 
   const goToHome = () => {
     history.push(routes.dashboard);
@@ -42,7 +43,7 @@ const NewUserPage = () => {
       status: RegistrationStatus.Review,
     }
 
-    mutation.mutate(formatedData, {
+    mutate(formatedData, {
       onSuccess: () => {
         notify('Cadastro realizado com sucesso', 'success');
         goToHome();
@@ -54,73 +55,77 @@ const NewUserPage = () => {
   };
 
   return (
-    <Container>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Card>
-          <IconButton onClick={() => goToHome()} aria-label="back">
-            <HiOutlineArrowLeft size={24} />
-          </IconButton>
+    <>
+      {isPending && <Loading />}
 
-          <TextField
-            id="employeeName"
-            placeholder="Nome"
-            label="Nome"
-            error={errors.employeeName?.message}
-            {...register("employeeName", {
-              required: "Campo obrigatório",
-              minLength: { value: 2, message: 'Nome deve conter pelo menos 2 letras' },
-              validate: {
-                hasSpace: value => /\s/.test(value) || 'Nome deve conter pelo menos um espaço',
-                noStartingNumber: value => !/^\d/.test(value) || 'Nome não pode começar com um número',
-              },
-            })}
-          />
+      <Container>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Card>
+            <IconButton onClick={() => goToHome()} aria-label="back">
+              <HiOutlineArrowLeft size={24} />
+            </IconButton>
 
-          <TextField
-            id="email"
-            placeholder="E-mail"
-            label="E-mail"
-            type="email"
-            error={errors.email?.message}
-            {...register("email", {
-              required: "Campo obrigatório",
-              pattern: {
-                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                message: 'E-mail inválido',
-              },
-            })}
-          />
+            <TextField
+              id="employeeName"
+              placeholder="Nome"
+              label="Nome"
+              error={errors.employeeName?.message}
+              {...register("employeeName", {
+                required: "Campo obrigatório",
+                minLength: { value: 2, message: 'Nome deve conter pelo menos 2 letras' },
+                validate: {
+                  hasSpace: value => /^(\p{L}+\s+){1,}\p{L}+$/u.test(value) || 'Nome deve conter pelo um nome e um sobrenome',
+                  noStartingNumber: value => !/^\d/.test(value) || 'Nome não pode começar com um número',
+                },
+              })}
+            />
 
-          <TextField
-            id="cpf"
-            placeholder="CPF"
-            label="CPF"
-            error={errors.cpf?.message}
-            {...register("cpf", {
-              required: "Campo obrigatório",
-              validate: value => validateCPF(value) || 'CPF inválido',
-              onChange: handleCPFChange,
-            })}
-          />
+            <TextField
+              id="email"
+              placeholder="E-mail"
+              label="E-mail"
+              type="email"
+              error={errors.email?.message}
+              {...register("email", {
+                required: "Campo obrigatório",
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                  message: 'E-mail inválido',
+                },
+              })}
+            />
 
-          <TextField
-            id="admissionDate"
-            label="Data de admissão"
-            type="date"
-            pattern="\d{2}-\d{2}-\d{4}"
-            error={errors.admissionDate?.message}
-            {...register("admissionDate", {
-              required: "Campo obrigatório",
-              validate: {
-                validDate: value => !isNaN(Date.parse(value)) || 'Data de admissão inválida',
-              },
-            })}
-          />
+            <TextField
+              id="cpf"
+              placeholder="CPF"
+              label="CPF"
+              error={errors.cpf?.message}
+              {...register("cpf", {
+                required: "Campo obrigatório",
+                validate: value => validateCPF(value) || 'CPF inválido',
+                onChange: handleCPFChange,
+              })}
+            />
 
-          <Button type="submit">Cadastrar</Button>
-        </Card>
-      </form>
-    </Container>
+            <TextField
+              id="admissionDate"
+              label="Data de admissão"
+              type="date"
+              pattern="\d{2}-\d{2}-\d{4}"
+              error={errors.admissionDate?.message}
+              {...register("admissionDate", {
+                required: "Campo obrigatório",
+                validate: {
+                  validDate: value => !isNaN(Date.parse(value)) || 'Data de admissão inválida',
+                },
+              })}
+            />
+
+            <Button type="submit">Cadastrar</Button>
+          </Card>
+        </form>
+      </Container>
+    </>
   );
 };
 
