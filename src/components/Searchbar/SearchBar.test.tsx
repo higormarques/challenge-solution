@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import SearchBar from './';
+import SearchBar from '.';
 import { maskCPF, validateCPF } from '~/utils/cpf-utils';
 import useDebounce from '~/hooks/useDebounce';
 import routes from "~/router/routes";
