@@ -12,6 +12,9 @@ https://challenge-solution-git-develop-higor-neves-marques-projects.vercel.app
 ### Storybook
 Execute o comando `yarn storybook` ou `npm run storybook` rodar o storybook e em seguida acesse `localhost:6006` para visualizar os componentes.
 
+### Organização dos componentes
+Considerei organizar por domínio e por Atomic Design, mas dado o contexto e tamanho do escopo do projeto, acredito que não faça sentido e poderia deixar mais bagunçado. Em caso de aumento da complexidade e escopo do projeto, seria simples ajustar para um outro padrão de organização de componentes.
+
 # Caju Front End Teste
 
 Esse é um teste para você demonstrar suas experiencia como front end, a aplicação basicamente se divide em duas telas, o `Dashboard` e um `Formulário`.
