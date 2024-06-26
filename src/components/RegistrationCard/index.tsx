@@ -76,7 +76,6 @@ const RegistrationCard = ({ data }: RegistrationCardProps) => {
 
   return (
     <>
-      {updateLoading || deleteLoading && <Loading />}
       <Card>
         <IconAndText>
           <HiOutlineUser />
@@ -115,6 +114,8 @@ const RegistrationCard = ({ data }: RegistrationCardProps) => {
           : <Button onClick={handleDeleteRegistration}>Excluir</Button>
         }
       </Dialog>
+
+      {updateLoading || deleteLoading && <Loading />}
     </>
   );
 };

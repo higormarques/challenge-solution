@@ -24,4 +24,6 @@ export const LoadingContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  zindex: 999;
+  background-color: rgba(255, 255, 255, 0.3);
 `;
