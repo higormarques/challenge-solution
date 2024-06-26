@@ -6,8 +6,8 @@ import {
   Container,
 } from "./Columns.styles";
 import RegistrationCard from "../RegistrationCard";
-import { Registration } from "~/types/types";
 import { RegistrationStatus } from "~/types/enums";
+import { ColumnsProps } from "./Columns.types";
 
 const allColumns = [
   { status: RegistrationStatus.Review, title: "Pronto para revisar" },
@@ -15,27 +15,25 @@ const allColumns = [
   { status: RegistrationStatus.Reproved, title: "Reprovado" },
 ];
 
-type ColumnsProps = {
-  registrations?: Registration[];
-};
-
 const Collumns = (props: ColumnsProps) => {
   return (
     <Container>
-      {allColumns.map((collum) => {
+      {allColumns.map(({ title, status, }) => {
         return (
-          <Column status={collum.status} key={collum.title}>
+          <Column status={status} key={title}>
             <>
-              <TitleColumn status={collum.status}>
-                {collum.title}
+              <TitleColumn status={status}>
+                {title}
               </TitleColumn>
               <ColumnContent>
                 {props?.registrations?.map((registration) => {
-                  if (registration.status === collum.status) {
+                  const { id } = registration;
+
+                  if (registration.status === status) {
                     return (
                       <RegistrationCard
                         data={registration}
-                        key={registration.id}
+                        key={id}
                       />
                     );
                   }

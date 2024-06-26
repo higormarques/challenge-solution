@@ -35,7 +35,7 @@ const SearchBar = ({ handleSearch }: SearchBarProps) => {
 
 
   const goToNewAdmissionPage = () => {
-    history.push(routes.newUser);
+    history?.push(routes.newUser);
   };
 
   const handleChage = (event: React.ChangeEvent<HTMLInputElement>) => {
