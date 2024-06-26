@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Registration } from '~/types/types';
+import envConfig from '../../../env-config';
 
-const API_URL = import.meta.env.VITE_JSON_DB_API_URL;
+const API_URL = envConfig.apiUrl;
 
 const updateRegistration = async (registration: Registration): Promise<unknown> => {
     const { id } = registration;
