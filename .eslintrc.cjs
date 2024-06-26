@@ -1,13 +1,19 @@
 module.exports = {
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:import/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'eslint-config-prettier',
-    "plugin:react-hooks/recommended"
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:import/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "eslint-config-prettier",
+    "plugin:react-hooks/recommended",
+    "plugin:storybook/recommended"
   ],
+  env: {
+    browser: true,
+    es2021: true,
+    node: true,
+  },
   settings: {
     react: {
       version: 'detect',
