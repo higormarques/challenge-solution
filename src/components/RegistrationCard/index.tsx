@@ -51,6 +51,8 @@ const RegistrationCard = ({ data }: RegistrationCardProps) => {
   }
 
   const handleUpdateStatus = () => {
+    setIsDialogOpen(false);
+
     updateMutate({ ...data, status: dialogData.status }, {
       onSuccess: () => {
         notify(`Solicitação para ${actions[dialogData.status]} finalizada com sucesso`, 'success');
