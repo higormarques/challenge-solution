@@ -1,7 +1,6 @@
-import TextField from "~/components/TextField";
+import { TextField, Button, IconButton, Loading } from "~/components";
 import { Container, Card } from "./NewUser.styles";
 import { HiOutlineArrowLeft } from "react-icons/hi";
-import Button, { IconButton } from "~/components/Buttons";
 import { useHistory } from "react-router-dom";
 import routes from "~/router/routes";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -10,7 +9,6 @@ import useAddRegistration from "~/hooks/useAddRegistration";
 import { RegistrationStatus } from "~/types/enums";
 import { RegistrationFormPayload } from "~/types/types";
 import { useNotification } from "~/hooks/useNotification";
-import Loading from "~/components/Loading";
 
 const NewUserPage = () => {
   const history = useHistory();

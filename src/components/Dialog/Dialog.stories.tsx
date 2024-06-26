@@ -4,7 +4,7 @@ import Dialog from './';
 import { DialogProps } from './Dialog.types';
 import { NotificationProvider } from '~/hooks/useNotification';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Button from '~/components/Buttons';
+import { Button } from '~/components';
 
 const queryClient = new QueryClient();
 

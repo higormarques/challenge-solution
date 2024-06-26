@@ -5,7 +5,7 @@ import NewUserPage from './';
 import { RegistrationStatus } from '~/types/enums';
 import useAddRegistration from '~/hooks/useAddRegistration';
 import { NotificationProvider } from '~/hooks/useNotification';
-import Notification from '~/components/Notification';
+import { Notification } from '~/components';
 
 jest.mock('~/hooks/useAddRegistration');
 

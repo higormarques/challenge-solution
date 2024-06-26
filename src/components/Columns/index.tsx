@@ -5,7 +5,7 @@ import {
   TitleColumn,
   Container,
 } from "./Columns.styles";
-import RegistrationCard from "../RegistrationCard";
+import { RegistrationCard } from "~/components";
 import { RegistrationStatus } from "~/types/enums";
 import { ColumnsProps } from "./Columns.types";
 

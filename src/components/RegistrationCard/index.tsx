@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button, { ButtonSmall } from "~/components/Buttons";
+import { Button, ButtonSmall, Dialog, Loading } from "~/components";
 import {
   Card,
   IconAndText,
@@ -12,12 +12,10 @@ import {
   HiOutlineTrash,
 } from "react-icons/hi";
 import { RegistrationCardProps, DialogData } from "./RegistrationCard.types";
-import Dialog from "~/components/Dialog";
 import useUpdateRegistration from "~/hooks/useUpdateRegistration";
 import useDeleteRegistration from "~/hooks/useDeleteRegistration";
 import { RegistrationStatus } from "~/types/enums";
 import { useNotification } from "~/hooks/useNotification";
-import Loading from "~/components/Loading";
 
 
 const RegistrationCard = ({ data }: RegistrationCardProps) => {

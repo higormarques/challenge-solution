@@ -1,7 +1,7 @@
 // Notification.stories.tsx
 
 import { Meta, StoryFn } from '@storybook/react';
-import Button from '~/components/Buttons';
+import { Button } from '~/components';
 import Notification from './';
 import { NotificationProvider, useNotification } from '~/hooks/useNotification';
 
